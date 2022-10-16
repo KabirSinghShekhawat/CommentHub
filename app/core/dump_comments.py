@@ -13,6 +13,9 @@ class StorageEngine:
     def dump(self, comments: List[dict]):
         comments = self.filter_comments(comments)
 
+        if not len(comments):
+            return None
+
         with open(self.file_loc, "wb") as comments_file:
             pickle.dump(comments, comments_file, protocol=pickle.HIGHEST_PROTOCOL)
             comments_file.close()

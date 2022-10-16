@@ -16,7 +16,7 @@ class DbCrudController:
             return db_file
         except SQLAlchemyError as e:
             self.db.rollback()
-            return type(e)
+            raise e
 
     def get_file_id(self, location: str):
         try:
@@ -25,10 +25,13 @@ class DbCrudController:
                 .filter(models.File.location == location)
                 .first()
             )
+            if not file_id_query:
+                return None
             return int(file_id_query.id)
+
         except SQLAlchemyError as e:
             self.db.rollback()
-            return type(e)
+            raise e
 
     def get_file_by_location(self, location: str):
         try:
@@ -91,10 +94,11 @@ class DbCrudController:
                 )
                 .one()
             )
-            return latest_version.__dict__
+
+            return latest_version
         except SQLAlchemyError as e:
             self.db.rollback()
-            return type(e)
+            raise e
 
     def create_file_version(self, version: serializers.Version):
         try:

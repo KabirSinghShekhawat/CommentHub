@@ -1,8 +1,8 @@
-"""on-delete configs
+"""first migration
 
-Revision ID: b8952b84d620
-Revises: c4ab9a7d2def
-Create Date: 2022-10-15 23:14:22.449821
+Revision ID: 1db52e753ed0
+Revises:
+Create Date: 2022-10-16 14:22:02.731087
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = "b8952b84d620"
-down_revision = "c4ab9a7d2def"
+revision = "1db52e753ed0"
+down_revision = None
 branch_labels = None
 depends_on = None
 
